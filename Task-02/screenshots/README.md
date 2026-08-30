@@ -20,6 +20,9 @@ ls -la
 cd ..
 cat eat.sh
 ./eat.sh <writable_fruit_file>
+
+```
+
 ## Level 2
 
 the task was to investigate whiskey peak and find the hidden clue
@@ -38,7 +41,11 @@ cat unlock_vault.sh
 export AWAKENING_SIGNATURE="ONE_PIECE{GITO_GITO_NO_AWAKENING}"
 ./unlock_vault.sh
 diff -u marine_intercept.log bounty_hunter_feed.log
+```
+
 clue = BAROQUE_DIAL{SPLIT_TIMELINE_MISDIRECTION}
+
+
 
 ## Level 3
 
@@ -55,10 +62,13 @@ cd GrandLine/Wax_Jungle
 echo "BAROQUE_DIAL{SPLIT_TIMELINE_MISDIRECTION}" | base64
 grep -rl "<the base 64 string>" .
 cat <file that matched>
+```
 
 at the end I recovered the first cipher fragment
 
+```text
 PONEGLYPH_FRAGMENT_I = "KjY2MjF4bW0lKzYqNyBsIS0vbTAtJTcnL"
+```
 
 ## Level 4
 
@@ -70,8 +80,11 @@ as a result got the second fragment
 
 ```text
 PONEGLYPH_FRAGMENT_II="SwnbzptDiM3JSpvFiMuJ28PJzA1J28VIzA="
+```
 
-###commands used
+### commands used
+
+```bash
 cd GrandLine/Water_7/galley_la_company
 file puffing_tom_blueprints
 cp puffing_tom_blueprints step1.gz
@@ -84,9 +97,9 @@ unzip step1_blueprints.zip
 ls -la blueprints_extracted
 file blueprints_extracted/*
 cat secret_link.txt
+```
 
 ## Level 5
-
 in this task we were asked to recover the missing files from git history and find the real decoder needed to combine the cipher fragments.but the problem was the current timeline had already gone through the Buster Call, so important files were deleted. so I used the `alternate_timeline` branch and checked the Git history to find a commit from before the files were removed. After going back to that commit, I searched through the vaults and checked the decoder scripts.Most of them were decoys, but there was a hidden `.cp9_secure_vault/poneglyph.py` file. It takes the two cipher fragments, decodes the combined value and gives the next step.
 
 ### Commands used
@@ -100,10 +113,11 @@ find . -type f
 cat vault_1/decode.sh
 cat .cp9_secure_vault/poneglyph.py
 python3 .cp9_secure_vault/poneglyph.py
+```
 
 as a result a new git repo url was found https://github.com/rogueone-x/Laugh-Tale-Merge-War
-## Level 6
 
+## Level 6
 the final task was to merge the two conflicting git timelines and recover the final password.The new repository had two branches, ancient_history and pirate_king_path.each branch contained only part of the information needed for the final password.I had to merge the branches instead of choosing only one side.This caused merge conflicts in the two key files, so I opened them, removed the Git conflict markers and combined the content from both branches.After resolving the conflicts, I added the files and completed the merge.then I ran the final script and entered the reconstructed password.
 
 ### Commands used
@@ -122,3 +136,4 @@ git add treasure/key_part_1.txt treasure/key_part_2.txt
 git commit -m "merge"
 chmod +x victory.sh
 ./victory.sh
+```
